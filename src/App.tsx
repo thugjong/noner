@@ -17,8 +17,9 @@ const App: React.FC = () => {
         <CssBaseline />
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: 'none', color: 'inherit' }}>
-              論語
+            <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
+              <Box component="span" sx={{ mr: 1, fontSize: '1.5rem' }}>📚</Box>
+              산스 논어클럽
             </Typography>
           </Toolbar>
         </AppBar>
