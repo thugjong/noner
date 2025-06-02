@@ -19,7 +19,7 @@ const Home: React.FC = () => {
         論語
       </Typography>
       <Typography variant="h5" gutterBottom align="center" sx={{ mb: 6 }}>
-        공자의 가르침
+        산스논어클럽
       </Typography>
       
       {randomPassage && (
