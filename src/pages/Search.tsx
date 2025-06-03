@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, TextField } from '@mui/material';
 import { chapters } from '../data/chapters';
 import PassageCard from '../components/PassageCard';
 
-const ChapterDetail: React.FC = () => {
-  const { id } = useParams();
-  const chapter = chapters.find(c => c.id === Number(id));
+const Search: React.FC = () => {
+  const [keyword, setKeyword] = useState('');
   const [favorites, setFavorites] = useState<string[]>(() => {
     const saved = localStorage.getItem('favorites');
     return saved ? JSON.parse(saved) : [];
   });
+
+  const allPassages = chapters.flatMap(ch => ch.passages);
+  const results = keyword
+    ? allPassages.filter(p => p.chinese.includes(keyword) || p.korean.includes(keyword))
+    : [];
 
   const handleFavorite = (pid: string) => {
     let next;
@@ -23,19 +26,17 @@ const ChapterDetail: React.FC = () => {
     localStorage.setItem('favorites', JSON.stringify(next));
   };
 
-  if (!chapter) {
-    return <Typography>장 정보를 찾을 수 없습니다.</Typography>;
-  }
-
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', py: 4 }}>
-      <Typography variant="h4" gutterBottom className="chinese" align="center">
-        {chapter.title.chinese}
-      </Typography>
-      <Typography variant="h5" gutterBottom align="center">
-        {chapter.title.korean}
-      </Typography>
-      {chapter.passages.map((passage) => (
+      <Typography variant="h5" gutterBottom>구절 검색</Typography>
+      <TextField
+        fullWidth
+        label="검색어(한문/한글)"
+        value={keyword}
+        onChange={e => setKeyword(e.target.value)}
+        sx={{ mb: 3 }}
+      />
+      {results.map((passage) => (
         <PassageCard
           key={passage.id}
           passage={passage}
@@ -43,8 +44,11 @@ const ChapterDetail: React.FC = () => {
           onFavorite={() => handleFavorite(passage.id)}
         />
       ))}
+      {keyword && results.length === 0 && (
+        <Typography color="text.secondary">검색 결과가 없습니다.</Typography>
+      )}
     </Box>
   );
 };
 
-export default ChapterDetail; 
+export default Search; 

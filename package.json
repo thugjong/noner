@@ -1,13 +1,18 @@
 {
-  "name": "noner",
+  "name": "noner-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thugjong.github.io/noner",
+  "homepage": "/noner-web/",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.15.1",
+    "multer": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1"
